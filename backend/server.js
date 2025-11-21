@@ -4,6 +4,9 @@ import helmet from 'helmet';
 import dotenv from 'dotenv';
 import rateLimit from 'express-rate-limit';
 import blockchainRoutes from './routes/blockchain.js';
+import ipfsRoutes from './routes/ipfs.js';
+import defiRoutes from './routes/defi.js';
+import daoRoutes from './routes/dao.js';
 import { errorHandler } from './middleware/errorHandler.js';
 
 dotenv.config();
@@ -36,12 +39,23 @@ app.use(express.urlencoded({ extended: true }));
 // Routes
 app.get('/', (req, res) => {
   res.json({
-    message: 'Web3 Backend API',
-    version: '1.0.0',
+    message: 'Web3 Backend API - Advanced Features',
+    version: '2.0.0',
     endpoints: {
       health: '/api/health',
-      blockchain: '/api/blockchain/*'
-    }
+      blockchain: '/api/blockchain/*',
+      ipfs: '/api/ipfs/*',
+      defi: '/api/defi/*',
+      dao: '/api/dao/*'
+    },
+    features: [
+      'Token Staking',
+      'DEX Swaps',
+      'NFT Marketplace',
+      'DAO Governance',
+      'IPFS Storage',
+      'Multi-chain Support'
+    ]
   });
 });
 
@@ -50,6 +64,9 @@ app.get('/api/health', (req, res) => {
 });
 
 app.use('/api/blockchain', blockchainRoutes);
+app.use('/api/ipfs', ipfsRoutes);
+app.use('/api/defi', defiRoutes);
+app.use('/api/dao', daoRoutes);
 
 // Error handling middleware
 app.use(errorHandler);

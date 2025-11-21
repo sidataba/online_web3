@@ -79,6 +79,14 @@ async function main() {
   const batchTransactionAddress = await batchTransaction.getAddress();
   console.log("✅ BatchTransaction deployed to:", batchTransactionAddress, "\n");
 
+  // Deploy P2PEscrow
+  console.log("📦 Deploying P2PEscrow...");
+  const P2PEscrow = await hre.ethers.getContractFactory("P2PEscrow");
+  const p2pEscrow = await P2PEscrow.deploy();
+  await p2pEscrow.waitForDeployment();
+  const p2pEscrowAddress = await p2pEscrow.getAddress();
+  console.log("✅ P2PEscrow deployed to:", p2pEscrowAddress, "\n");
+
   // Log deployment info
   console.log("📋 Deployment Summary:");
   console.log("=======================");
@@ -91,6 +99,7 @@ async function main() {
   console.log("SimpleSwap:", simpleSwapAddress);
   console.log("TokenVesting:", tokenVestingAddress);
   console.log("BatchTransaction:", batchTransactionAddress);
+  console.log("P2PEscrow:", p2pEscrowAddress);
   console.log("Network:", hre.network.name);
   console.log("=======================\n");
 
@@ -110,7 +119,8 @@ async function main() {
       DAO: daoAddress,
       SimpleSwap: simpleSwapAddress,
       TokenVesting: tokenVestingAddress,
-      BatchTransaction: batchTransactionAddress
+      BatchTransaction: batchTransactionAddress,
+      P2PEscrow: p2pEscrowAddress
     }
   };
 

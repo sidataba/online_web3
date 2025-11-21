@@ -7,6 +7,8 @@ import blockchainRoutes from './routes/blockchain.js';
 import ipfsRoutes from './routes/ipfs.js';
 import defiRoutes from './routes/defi.js';
 import daoRoutes from './routes/dao.js';
+import paymentRoutes from './routes/payment.js';
+import escrowRoutes from './routes/escrow.js';
 import { errorHandler } from './middleware/errorHandler.js';
 
 dotenv.config();
@@ -46,7 +48,9 @@ app.get('/', (req, res) => {
       blockchain: '/api/blockchain/*',
       ipfs: '/api/ipfs/*',
       defi: '/api/defi/*',
-      dao: '/api/dao/*'
+      dao: '/api/dao/*',
+      payment: '/api/payment/*',
+      escrow: '/api/escrow/*'
     },
     features: [
       'Token Staking',
@@ -54,7 +58,10 @@ app.get('/', (req, res) => {
       'NFT Marketplace',
       'DAO Governance',
       'IPFS Storage',
-      'Multi-chain Support'
+      'Multi-chain Support',
+      'Fiat Payments',
+      'Crypto On-Ramps',
+      'P2P Escrow Trading'
     ]
   });
 });
@@ -67,6 +74,8 @@ app.use('/api/blockchain', blockchainRoutes);
 app.use('/api/ipfs', ipfsRoutes);
 app.use('/api/defi', defiRoutes);
 app.use('/api/dao', daoRoutes);
+app.use('/api/payment', paymentRoutes);
+app.use('/api/escrow', escrowRoutes);
 
 // Error handling middleware
 app.use(errorHandler);

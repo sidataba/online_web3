@@ -9,6 +9,7 @@ import defiRoutes from './routes/defi.js';
 import daoRoutes from './routes/dao.js';
 import paymentRoutes from './routes/payment.js';
 import escrowRoutes from './routes/escrow.js';
+import advancedRoutes from './routes/advanced.js';
 import { errorHandler } from './middleware/errorHandler.js';
 
 dotenv.config();
@@ -50,7 +51,8 @@ app.get('/', (req, res) => {
       defi: '/api/defi/*',
       dao: '/api/dao/*',
       payment: '/api/payment/*',
-      escrow: '/api/escrow/*'
+      escrow: '/api/escrow/*',
+      advanced: '/api/advanced/*'
     },
     features: [
       'Token Staking',
@@ -61,7 +63,12 @@ app.get('/', (req, res) => {
       'Multi-chain Support',
       'Fiat Payments',
       'Crypto On-Ramps',
-      'P2P Escrow Trading'
+      'P2P Escrow Trading',
+      'Account Abstraction',
+      'Flash Loans',
+      'Soul Bound Tokens',
+      'Token Launchpad',
+      'Limit Orders'
     ]
   });
 });
@@ -76,6 +83,7 @@ app.use('/api/defi', defiRoutes);
 app.use('/api/dao', daoRoutes);
 app.use('/api/payment', paymentRoutes);
 app.use('/api/escrow', escrowRoutes);
+app.use('/api/advanced', advancedRoutes);
 
 // Error handling middleware
 app.use(errorHandler);

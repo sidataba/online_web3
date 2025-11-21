@@ -87,6 +87,46 @@ async function main() {
   const p2pEscrowAddress = await p2pEscrow.getAddress();
   console.log("✅ P2PEscrow deployed to:", p2pEscrowAddress, "\n");
 
+  // Deploy AccountFactory
+  console.log("📦 Deploying AccountFactory...");
+  const AccountFactory = await hre.ethers.getContractFactory("AccountFactory");
+  const accountFactory = await AccountFactory.deploy();
+  await accountFactory.waitForDeployment();
+  const accountFactoryAddress = await accountFactory.getAddress();
+  console.log("✅ AccountFactory deployed to:", accountFactoryAddress, "\n");
+
+  // Deploy FlashLoan
+  console.log("📦 Deploying FlashLoan...");
+  const FlashLoan = await hre.ethers.getContractFactory("FlashLoan");
+  const flashLoan = await FlashLoan.deploy();
+  await flashLoan.waitForDeployment();
+  const flashLoanAddress = await flashLoan.getAddress();
+  console.log("✅ FlashLoan deployed to:", flashLoanAddress, "\n");
+
+  // Deploy SoulBoundToken
+  console.log("📦 Deploying SoulBoundToken...");
+  const SoulBoundToken = await hre.ethers.getContractFactory("SoulBoundToken");
+  const soulBoundToken = await SoulBoundToken.deploy(deployer.address);
+  await soulBoundToken.waitForDeployment();
+  const soulBoundTokenAddress = await soulBoundToken.getAddress();
+  console.log("✅ SoulBoundToken deployed to:", soulBoundTokenAddress, "\n");
+
+  // Deploy TokenLaunchpad
+  console.log("📦 Deploying TokenLaunchpad...");
+  const TokenLaunchpad = await hre.ethers.getContractFactory("TokenLaunchpad");
+  const tokenLaunchpad = await TokenLaunchpad.deploy(deployer.address);
+  await tokenLaunchpad.waitForDeployment();
+  const tokenLaunchpadAddress = await tokenLaunchpad.getAddress();
+  console.log("✅ TokenLaunchpad deployed to:", tokenLaunchpadAddress, "\n");
+
+  // Deploy LimitOrderDEX
+  console.log("📦 Deploying LimitOrderDEX...");
+  const LimitOrderDEX = await hre.ethers.getContractFactory("LimitOrderDEX");
+  const limitOrderDEX = await LimitOrderDEX.deploy();
+  await limitOrderDEX.waitForDeployment();
+  const limitOrderDEXAddress = await limitOrderDEX.getAddress();
+  console.log("✅ LimitOrderDEX deployed to:", limitOrderDEXAddress, "\n");
+
   // Log deployment info
   console.log("📋 Deployment Summary:");
   console.log("=======================");
@@ -100,6 +140,11 @@ async function main() {
   console.log("TokenVesting:", tokenVestingAddress);
   console.log("BatchTransaction:", batchTransactionAddress);
   console.log("P2PEscrow:", p2pEscrowAddress);
+  console.log("AccountFactory:", accountFactoryAddress);
+  console.log("FlashLoan:", flashLoanAddress);
+  console.log("SoulBoundToken:", soulBoundTokenAddress);
+  console.log("TokenLaunchpad:", tokenLaunchpadAddress);
+  console.log("LimitOrderDEX:", limitOrderDEXAddress);
   console.log("Network:", hre.network.name);
   console.log("=======================\n");
 
@@ -120,7 +165,12 @@ async function main() {
       SimpleSwap: simpleSwapAddress,
       TokenVesting: tokenVestingAddress,
       BatchTransaction: batchTransactionAddress,
-      P2PEscrow: p2pEscrowAddress
+      P2PEscrow: p2pEscrowAddress,
+      AccountFactory: accountFactoryAddress,
+      FlashLoan: flashLoanAddress,
+      SoulBoundToken: soulBoundTokenAddress,
+      TokenLaunchpad: tokenLaunchpadAddress,
+      LimitOrderDEX: limitOrderDEXAddress
     }
   };
 
